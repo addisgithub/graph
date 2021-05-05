@@ -2,82 +2,57 @@
  * @file main.cpp
  * @brief This is a graph project.
  * @details This is the long brief at the top of main.cpp.
- * @author Addis Bogale and Bona Tufa
+ * @author Addis Bogale
  * @date 4/2/2021
  * 
  */
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-
-
 using namespace std;
 
-class Graph{
+
+class Graph {
 private:
     int n;
 public:
-    vector <int> adj;
+   int Matrix[10][10] = { 0 };
 
-   Graph(vector<int> a, int input) {
+   Graph(int input) {
        n = input;
-       adj = a;
    }
 
-void addEdge(vector<int> adj, int u, int v)
-{
-    adj.push_back(v);
-    adj.push_back(u);
+void addEdge(int i, int j) {
+    Matrix[i][j] = true;
 }
-void delEdge(vector<int> adj, int u, int v)
-{
-    // Traversing through the first vector list
-    // and removing the second element from it
-    for (int i = 0; i < adj.size(); i++) {
-        if (adj[i] == v) {
-            adj.erase(adj.begin() + i);
-            break;
-        }
-    }
- 
-    // Traversing through the second vector list
-    // and removing the first element from it
-    for (int i = 0; i < adj.size(); i++) {
-        if (adj[i] == u) {
-            adj.erase(adj.begin() + i);
-            break;
-        }
-    }
+void removeEdge(int i, int j) {
+    Matrix[i][j] = false;
 }
-
-
 bool hasEdge(int i, int j) {
-    vector<int>::iterator it;
-    it = find (adj.begin(), adj.end(), i);
-    if (it != adj.end())
-        return adj[i];
+    return Matrix[i][j];
 }
 
+void displayMatrix() {
+   for(int i = 0; i < n; i++) {
+      for(int j = 0; j < n; j++) {
+         cout << Matrix[i][j];
+      }
+      cout << endl;
+   }
+}
 
 void outEdges(int i, vector<int> &edges) {
-    for (int k = 0; k < adj.size(); k++)
-        edges.push_back(adj.at(k));
+    for (int j = 0; j < n; j++)
+        if (Matrix[i][j]) edges.push_back(j);
 }
-
 void inEdges(int i, vector<int> &edges) {
-    for (int j = 0; j < n; j++) {
-        vector<int>::iterator it;
-        it = find (adj.begin(), adj.end(), i);
-        if (it != adj.end()) 
-                edges.push_back(j);
-    }
+    for (int j = 0; j < n; j++) 
+        if (Matrix[j][i]) edges.push_back(j);
 }
 
 int nVertices() {
     return n * n;
 }
-
 
 void bfs(Graph &g, int r) {
     bool *seen = new bool[g.nVertices()];
@@ -101,7 +76,7 @@ void bfs(Graph &g, int r) {
     delete[] seen;
 }
 
-
+//EXTRA CREDIT
 
 void dfs2(Graph &g, int r) {
     bool *c = new bool[g.nVertices()];
@@ -122,46 +97,24 @@ void dfs2(Graph &g, int r) {
 delete[] c;
 }
 
-void printGraph(vector<int> adj, int V)
-{   
-    int x;
-    for (int v = 0; v < V; ++v) {
-        cout << "vertex " << v << " ";
-        for (auto x : adj){
-            cout << "-> " << x;
-        printf("\n");
-        }
-        break;
-    }
-    
-    printf("\n");
-}
 };
 
-int main()
-{
-    int v;
-    vector<int> value;
-    
-    Graph test = Graph(value, 10);
 
-    // Adding edge as shown in the example figure
+int main(int, char**) {
+    Graph value(10);
+    value.addEdge(0,1);
+    value.addEdge(3,3);
+    value.displayMatrix();
+    value.bfs(value, 0);
+    value.removeEdge(3,3);
+    value.displayMatrix();
+
+    value.addEdge(2,3);
+    value.addEdge(1,3);
     
+    value.hasEdge(0,1);
+    value.dfs2(value, 2);
+    value.displayMatrix();
     
-    test.addEdge(value, 0, 4);
-    test.printGraph(value, v);
-    test.addEdge(value,1, 2);
-    test.printGraph(value, v);
-   
-    // Printing adjacency matrix
-    test.printGraph(value, v);
- 
-    // Deleting edge (1, 4)
-    // as shown in the example figure
-    test.delEdge(value, 1, 4);
- 
-    // Printing adjacency matrix
-    test.printGraph(value, v);
- 
-    return 0;
+
 }

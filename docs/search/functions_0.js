@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['addedge_15',['addEdge',['../classGraph.html#a47db9221d948e3133d9d5cc9f0afe160',1,'Graph']]]
+  ['addedge_15',['addEdge',['../classGraph.html#a8fa1898864bec0815869e9ef700c0f2f',1,'Graph']]]
 ];

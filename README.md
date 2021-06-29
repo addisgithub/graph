@@ -1,6 +1,7 @@
 # This is an implementation of graph in data structures.
-This program uses a 10 by 10 matix.
-Use different funcions 
+
+- The main.cpp file displays a matrix graph.
+- Uses different functions to implement the matrix grpah. 
 
 # References
 1. https://opendatastructures.org/ods-cpp.pdf

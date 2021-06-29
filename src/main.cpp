@@ -1,10 +1,6 @@
-/**
- * @file main.cpp
- * @brief This is a graph project.
- * @details This is the long brief at the top of main.cpp.
+/*
  * @author Addis Bogale
  * @date 4/2/2021
- * 
  */
 
 #include <iostream>
@@ -76,7 +72,6 @@ void bfs(Graph &g, int r) {
     delete[] seen;
 }
 
-//EXTRA CREDIT
 
 void dfs2(Graph &g, int r) {
     bool *c = new bool[g.nVertices()];
